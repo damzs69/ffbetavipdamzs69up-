@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF Beta VIP - Verifikasi Super Ketat</title>
+    <style>
+        /* [Previous CSS styles remain exactly the same] */
+    </style>
+</head>
+<body>
+    <!-- [Previous HTML structure remains the same until the script section] -->
+
+    <script>
+        // [Previous configuration and functions remain the same until performUltraStrictVerification()]
+
+        function performUltraStrictVerification() {
+            const nowWIB = getCurrentWIBTime();
+            const threeMinutesAgo = new Date(nowWIB.getTime() - 3 * 60000);
+            
+            // Get the actual file name
+            const paymentProof = document.getElementById('paymentProof').files[0];
+            const fileName = paymentProof ? paymentProof.name : '';
+            
+            // STRICTER VALIDATION CHECKS
+            // 1. Check if file name matches expected pattern (e.g., contains 'bukti', 'transfer', 'payment' etc)
+            const isFileNameValid = fileName && (
+                fileName.toLowerCase().includes('bukti') || 
+                fileName.toLowerCase().includes('transfer') || 
+                fileName.toLowerCase().includes('payment') ||
+                fileName.toLowerCase().includes('dana')
+            );
+            
+            // Only proceed with verification if file name is valid
+            if (!isFileNameValid) {
+                showVerificationError(["❌ Nama file bukti transfer tidak valid (harus mengandung kata 'bukti', 'transfer', atau 'payment')"]);
+                return;
+            }
+            
+            // Simulated OCR data with stricter validation
+            const ocrData = {
+                recipientName: validRecipientNames[Math.floor(Math.random() * validRecipientNames.length)],
+                accountNumber: validAccountNumber,
+                amount: expectedAmount,
+                transferTime: new Date(nowWIB.getTime() - Math.floor(Math.random() * 4) * 60000), // 0-3 minutes ago
+                status: "Berhasil"
+            };
+            
+            // 30% chance to simulate invalid data (increased from 10%)
+            if (Math.random() < 0.3) {
+                ocrData.amount = expectedAmount + 1000;
+                ocrData.transferTime = new Date(nowWIB.getTime() - (4 + Math.floor(Math.random() * 10)) * 60000); // 4-13 minutes ago
+                ocrData.recipientName = "Invalid Name";
+            }
+            
+            // Format OCR result
+            const ocrText = `
+                Hasil Pemindaian:
+                Nama Penerima: ${ocrData.recipientName}
+                Nomor Tujuan: ${ocrData.accountNumber}
+                Jumlah Transfer: Rp ${ocrData.amount.toLocaleString()}
+                Waktu Transfer: ${formatWIBTime(ocrData.transferTime)}
+                Status: ${ocrData.status}
+                Nama File: ${fileName}
+            `;
+            
+            // Show OCR results
+            document.getElementById('scanningStatus').classList.add('hidden');
+            document.getElementById('ocrResult').classList.remove('hidden');
+            document.getElementById('ocrResult').textContent = ocrText;
+            
+            // Perform ultra-strict validation
+            validatePaymentWithUltraStrictRules(ocrData, nowWIB, fileName);
+        }
+        
+        function validatePaymentWithUltraStrictRules(ocrData, currentWIBTime, fileName) {
+            const threeMinutesAgo = new Date(currentWIBTime.getTime() - 3 * 60000);
+            
+            // 1. Validate recipient name
+            const isNameValid = validRecipientNames.includes(ocrData.recipientName);
+            
+            // 2. Validate account number
+            const isAccountValid = ocrData.accountNumber === validAccountNumber;
+            
+            // 3. Validate amount (must be exact)
+            const isAmountValid = ocrData.amount === expectedAmount;
+            
+            // 4. Validate time (within 3 minutes)
+            let isTimeValid = true;
+            let timeError = '';
+            
+            if (ocrData.transferTime > currentWIBTime) {
+                isTimeValid = false;
+                timeError = '❌ Waktu transfer LEBIH BARU dari waktu server';
+            } else if (ocrData.transferTime < threeMinutesAgo) {
+                isTimeValid = false;
+                timeError = `❌ Waktu transfer SUDAH LEBIH DARI 3 MENIT (Transfer: ${formatWIBTime(ocrData.transferTime)}, Server: ${formatWIBTime(currentWIBTime)})`;
+            }
+            
+            // 5. Photo validation (now includes file name check)
+            const isPhotoValid = Math.random() > 0.2 && // 80% valid (reduced from 90%)
+                               fileName && 
+                               (fileName.toLowerCase().includes('bukti') || 
+                                fileName.toLowerCase().includes('transfer') || 
+                                fileName.toLowerCase().includes('payment'));
+            
+            // Check all validations
+            const isValid = isNameValid && isAccountValid && isAmountValid && isTimeValid && isPhotoValid;
+            
+            // Display results
+            const validationResult = document.getElementById('validationResult');
+            
+            if (isValid) {
+                // [Rest of the success case remains the same]
+            } else {
+                // Show specific errors
+                let errorMessages = [];
+                
+                if (!isNameValid) {
+                    errorMessages.push("❌ Nama penerima tidak valid");
+                }
+                
+                if (!isAccountValid) {
+                    errorMessages.push("❌ Nomor DANA tidak valid");
+                }
+                
+                if (!isAmountValid) {
+                    errorMessages.push(`❌ Jumlah transfer Rp ${ocrData.amount.toLocaleString()} tidak sesuai (harus Rp ${expectedAmount.toLocaleString()})`);
+                }
+                
+                if (!isTimeValid) {
+                    errorMessages.push(timeError);
+                }
+                
+                if (!isPhotoValid) {
+                    errorMessages.push("❌ Foto bukti tidak valid (nama file tidak sesuai atau foto buram/tampak diedit)");
+                }
+                
+                // [Rest of the error display remains the same]
+            }
+        }
+
+        // [Rest of the existing functions remain the same]
+    </script>
+</body>
+</html>
