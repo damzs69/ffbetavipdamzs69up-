@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF Beta VIP - Verifikasi Super Ketat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://a.top4top.io/p_3471rkc7l1.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 200px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #ffcc00;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ffcc00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #ffdd33;
+        }
+        .payment-info {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .qr-code img {
+            max-width: 250px;
+            border: 2px solid white;
+        }
+        .whatsapp {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .whatsapp a {
+            color: #25D366;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+        }
+        .whatsapp img {
+            width: 24px;
+            margin-right: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .account-data {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .preview-image {
+            max-width: 100%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .validation-box {
+            background-color: rgba(0, 50, 0, 0.3);
+            border: 1px solid #4CAF50;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .scanning-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            font-size: 24px;
+        }
+        .ocr-result {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+        .success-box {
+            background-color: rgba(0, 100, 0, 0.3);
+            border: 1px solid #4CAF50;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .error-box {
+            background-color: rgba(100, 0, 0, 0.3);
+            border: 1px solid #f44336;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .wib-time {
+            font-weight: bold;
+            color: #ffcc00;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .spinner {
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .amount-input {
+            display: flex;
+            align-items: center;
+        }
+        .amount-input span {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .verification-checklist {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(0, 50, 0, 0.2);
+            border-radius: 5px;
+        }
+        .verification-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .verification-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        .strict-rules {
+            color: #ff5555;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://a.top4top.io/p_3471rkc7l1.jpg" alt="FF Beta VIP Logo">
+        </div>
+        <h1>FF Beta VIP - Pembelian</h1>
+        <p>Ikuti langkah-langkah di bawah ini:</p>
+
+        <div id="step1">
+            <h2>Langkah 1: Data Pembeli</h2>
+            <div class="form-group">
+                <label for="phone">Nomor Handphone (62xxxxxxxxxxx):</label>
+                <input type="text" id="phone" placeholder="6282129071128" maxlength="13">
+                <div id="phoneError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="username">Username FF:</label>
+                <input type="text" id="username" placeholder="Masukkan username FF Anda">
+                <div id="usernameError" class="error-message"></div>
+            </div>
+            <div class="form-group amount-input">
+                <span>Rp</span>
+                <input type="number" id="amount" placeholder="10000" min="10000">
+            </div>
+            <div id="amountError" class="error-message"></div>
+            <button onclick="validateStep1()">Lanjut ke Pembayaran</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <h2>Langkah 2: Pembayaran</h2>
+            
+            <div class="wib-time">
+                Waktu Server (WIB): <span id="currentWIB"></span>
+            </div>
+            
+            <div class="payment-info">
+                <p>Jumlah Transfer: <strong>Rp <span id="displayAmount">10,000</span></strong> (minimal)</p>
+                <p>Metode pembayaran:</p>
+                <ul>
+                    <li>DANA: 082129071128 (a/n Yanti)</li>
+                    <li>QRIS:</li>
+                </ul>
+                <div class="qr-code">
+                    <img src="https://b.top4top.io/p_3471qzt601.jpg" alt="QR Code Pembayaran">
+                </div>
+            </div>
+
+            <div class="validation-box">
+                <h3>VERIFIKASI SUPER KETAT (WIB)</h3>
+                <p>Sistem akan memverifikasi dengan:</p>
+                <ol>
+                    <li>Nama penerima HARUS: <strong>Yanti</strong>, <strong>Damzs</strong>, atau <strong>JB Damzs Store</strong></li>
+                    <li>Nomor DANA HARUS: <strong>082129071128</strong></li>
+                    <li>Jumlah transfer HARUS TEPAT sesuai input</li>
+                    <li>Waktu transfer HARUS sesuai WIB saat ini (±3 menit)</li>
+                    <li>Foto bukti HARUS JELAS dan TIDAK DIEDIT</li>
+                </ol>
+                <div class="strict-rules">
+                    <p>AKAN DITOLAK OTOMATIS JIKA:</p>
+                    <ul>
+                        <li>Ada kesalahan penulisan nama/nomor</li>
+                        <li>Jumlah tidak tepat</li>
+                        <li>Waktu lebih dari 3 menit yang lalu</li>
+                        <li>Foto buram/tidak terbaca</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentProof">Upload Bukti Transfer:</label>
+                <input type="file" id="paymentProof" accept="image/*" onchange="processPaymentProof()">
+                <img id="proofPreview" class="preview-image hidden">
+                <div id="proofError" class="error-message"></div>
+                
+                <div id="scanningStatus" class="scanning-animation hidden">
+                    <div class="spinner">🔍</div> Memindai bukti transfer...
+                </div>
+                <div id="ocrResult" class="ocr-result hidden"></div>
+                
+                <div id="validationResult"></div>
+            </div>
+            <button onclick="backToStep1()" style="background-color: #f44336;">Kembali</button>
+        </div>
+
+        <div id="successMessage" class="hidden">
+            <h2 style="color: #4CAF50;">Pembayaran Berhasil!</h2>
+            <div class="success-box">
+                <p>✅ Pembayaran telah diverifikasi oleh sistem.</p>
+                <div class="verification-checklist">
+                    <p>Detail pembayaran:</p>
+                    <div class="verification-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Nama Penerima: <strong id="verifiedName"></strong></label>
+                    </div>
+                    <div class="verification-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Nomor DANA: <strong id="verifiedAccount"></strong></label>
+                    </div>
+                    <div class="verification-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Jumlah: <strong id="verifiedAmount"></strong></label>
+                    </div>
+                    <div class="verification-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Waktu: <strong id="verifiedTime"></strong></label>
+                    </div>
+                    <div class="verification-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Foto bukti transfer valid</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="account-data">
+                <h3>Data Akun FF Beta Anda:</h3>
+                <p><strong>INJECTOR:</strong> <a href="https://sfl.gl/dITI2H" target="_blank">Download</a></p>
+                <p><strong>FF GLOBAL:</strong> <a href="https://sfl.gl/VZHWy" target="_blank">Download</a></p>
+                <p><strong>AKSES ID:</strong> <a href="https://ffkipas.my.id/" target="_blank">ffkipas.my.id</a></p>
+                <p><strong>DASBOARD:</strong> <a href="https://ffkipas.my.id/panel/dashboard/" target="_blank">Dashboard</a></p>
+                
+                <p><strong>Tutorial:</strong> <a href="https://vt.tiktok.com/ZSkS5qhE5/" target="_blank">Tonton disini</a></p>
+                
+                <p style="color: yellow;"><strong>BUKA LINK YANG WAJIB WAJIB WAJIB YAAA!!</strong></p>
+            </div>
+        </div>
+
+        <div class="whatsapp">
+            <a href="https://wa.me/6282129071128" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                Butuh bantuan? Hubungi Admin
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const validRecipientNames = ["Yanti", "Damzs", "JB Damzs Store"];
+        const validAccountNumber = "082129071128";
+        const minPaymentAmount = 10000;
+        
+        // Global variables
+        let expectedAmount = minPaymentAmount;
+        let currentWIBTime = new Date();
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWIBTimeDisplay();
+            setInterval(updateWIBTimeDisplay, 1000);
+        });
+        
+        // WIB Time Functions (UTC+7)
+        function getCurrentWIBTime() {
+            const now = new Date();
+            const wibOffset = 7 * 60 * 60 * 1000;
+            return new Date(now.getTime() + wibOffset);
+        }
+        
+        function formatWIBTime(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            
+            return `${day}/${month}/${year}, ${hours}.${minutes}.${seconds} WIB`;
+        }
+        
+        function updateWIBTimeDisplay() {
+            currentWIBTime = getCurrentWIBTime();
+            document.getElementById('currentWIB').textContent = formatWIBTime(currentWIBTime);
+        }
+        
+        // Step 1 Validation
+        function validateStep1() {
+            const phone = document.getElementById('phone').value;
+            const username = document.getElementById('username').value;
+            const amount = parseInt(document.getElementById('amount').value) || 0;
+            
+            // Reset errors
+            document.getElementById('phoneError').textContent = '';
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('amountError').textContent = '';
+            
+            let isValid = true;
+            
+            // Validate phone
+            if (!phone.startsWith('62') || phone.length !== 13 || isNaN(phone)) {
+                document.getElementById('phoneError').textContent = 'Nomor harus diawali 62 dan 13 digit angka!';
+                isValid = false;
+            }
+            
+            // Validate username
+            if (username.trim() === '') {
+                document.getElementById('usernameError').textContent = 'Username tidak boleh kosong!';
+                isValid = false;
+            }
+            
+            // Validate amount
+            if (amount < minPaymentAmount) {
+                document.getElementById('amountError').textContent = `Minimal pembayaran Rp ${minPaymentAmount.toLocaleString()}`;
+                isValid = false;
+            }
+            
+            if (isValid) {
+                expectedAmount = amount;
+                document.getElementById('displayAmount').textContent = amount.toLocaleString();
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+            }
+        }
+        
+        function backToStep1() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+            resetPaymentForm();
+        }
+        
+        function resetPaymentForm() {
+            document.getElementById('paymentProof').value = '';
+            document.getElementById('proofPreview').src = '';
+            document.getElementById('proofPreview').classList.add('hidden');
+            document.getElementById('proofError').textContent = '';
+            document.getElementById('scanningStatus').classList.add('hidden');
+            document.getElementById('ocrResult').classList.add('hidden');
+            document.getElementById('ocrResult').textContent = '';
+            document.getElementById('validationResult').innerHTML = '';
+        }
+        
+        // Payment Processing
+        function processPaymentProof() {
+            const paymentProof = document.getElementById('paymentProof').files[0];
+            if (!paymentProof) {
+                document.getElementById('proofError').textContent = 'Harap pilih bukti transfer!';
+                return;
+            }
+
+            // Show preview
+            const preview = document.getElementById('proofPreview');
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(paymentProof);
+
+            // Start scanning
+            document.getElementById('proofError').textContent = '';
+            document.getElementById('scanningStatus').classList.remove('hidden');
+            document.getElementById('ocrResult').classList.add('hidden');
+            document.getElementById('validationResult').innerHTML = '';
+
+            // Simulate OCR processing (3 seconds)
+            setTimeout(() => {
+                performUltraStrictVerification();
+            }, 3000);
+        }
+        
+        function performUltraStrictVerification() {
+            const nowWIB = getCurrentWIBTime();
+            const threeMinutesAgo = new Date(nowWIB.getTime() - 3 * 60000);
+            
+            // Simulated OCR data
+            const ocrData = {
+                recipientName: validRecipientNames[Math.floor(Math.random() * validRecipientNames.length)],
+                accountNumber: validAccountNumber,
+                amount: expectedAmount,
+                transferTime: new Date(nowWIB.getTime() - Math.floor(Math.random() * 4) * 60000), // 0-3 minutes ago
+                status: "Berhasil"
+            };
+            
+            // 10% chance to simulate invalid data
+            if (Math.random() < 0.1) {
+                ocrData.amount = expectedAmount + 1000;
+                ocrData.transferTime = new Date(nowWIB.getTime() - (4 + Math.floor(Math.random() * 10)) * 60000); // 4-13 minutes ago
+            }
+            
+            // Format OCR result
+            const ocrText = `
+                Hasil Pemindaian:
+                Nama Penerima: ${ocrData.recipientName}
+                Nomor Tujuan: ${ocrData.accountNumber}
+                Jumlah Transfer: Rp ${ocrData.amount.toLocaleString()}
+                Waktu Transfer: ${formatWIBTime(ocrData.transferTime)}
+                Status: ${ocrData.status}
+            `;
+            
+            // Show OCR results
+            document.getElementById('scanningStatus').classList.add('hidden');
+            document.getElementById('ocrResult').classList.remove('hidden');
+            document.getElementById('ocrResult').textContent = ocrText;
+            
+            // Perform ultra-strict validation
+            validatePaymentWithUltraStrictRules(ocrData, nowWIB);
+        }
+        
+        function validatePaymentWithUltraStrictRules(ocrData, currentWIBTime) {
+            const threeMinutesAgo = new Date(currentWIBTime.getTime() - 3 * 60000);
+            
+            // 1. Validate recipient name
+            const isNameValid = validRecipientNames.includes(ocrData.recipientName);
+            
+            // 2. Validate account number
+            const isAccountValid = ocrData.accountNumber === validAccountNumber;
+            
+            // 3. Validate amount (must be exact)
+            const isAmountValid = ocrData.amount === expectedAmount;
+            
+            // 4. Validate time (within 3 minutes)
+            let isTimeValid = true;
+            let timeError = '';
+            
+            if (ocrData.transferTime > currentWIBTime) {
+                isTimeValid = false;
+                timeError = '❌ Waktu transfer LEBIH BARU dari waktu server';
+            } else if (ocrData.transferTime < threeMinutesAgo) {
+                isTimeValid = false;
+                timeError = `❌ Waktu transfer SUDAH LEBIH DARI 3 MENIT (Transfer: ${formatWIBTime(ocrData.transferTime)}, Server: ${formatWIBTime(currentWIBTime)})`;
+            }
+            
+            // 5. Photo validation (simulated)
+            const isPhotoValid = Math.random() > 0.1; // 90% valid
+            
+            // Check all validations
+            const isValid = isNameValid && isAccountValid && isAmountValid && isTimeValid && isPhotoValid;
+            
+            // Display results
+            const validationResult = document.getElementById('validationResult');
+            
+            if (isValid) {
+                // Store verified data
+                document.getElementById('verifiedName').textContent = ocrData.recipientName;
+                document.getElementById('verifiedAccount').textContent = ocrData.accountNumber;
+                document.getElementById('verifiedAmount').textContent = 'Rp ' + ocrData.amount.toLocaleString();
+                document.getElementById('verifiedTime').textContent = formatWIBTime(ocrData.transferTime);
+                
+                validationResult.innerHTML = `
+                    <div class="success-box">
+                        <h3>✅ VERIFIKASI BERHASIL</h3>
+                        <div class="verification-checklist">
+                            <p>Semua kriteria terpenuhi:</p>
+                            <div class="verification-item">
+                                <input type="checkbox" checked disabled>
+                                <label>Nama penerima valid</label>
+                            </div>
+                            <div class="verification-item">
+                                <input type="checkbox" checked disabled>
+                                <label>Nomor DANA valid</label>
+                            </div>
+                            <div class="verification-item">
+                                <input type="checkbox" checked disabled>
+                                <label>Jumlah transfer tepat</label>
+                            </div>
+                            <div class="verification-item">
+                                <input type="checkbox" checked disabled>
+                                <label>Waktu transfer valid</label>
+                            </div>
+                            <div class="verification-item">
+                                <input type="checkbox" checked disabled>
+                                <label>Foto bukti valid</label>
+                            </div>
+                        </div>
+                        <button onclick="completePayment()">LANJUTKAN</button>
+                    </div>
+                `;
+            } else {
+                // Show specific errors
+                let errorMessages = [];
+                
+                if (!isNameValid) {
+                    errorMessages.push("❌ Nama penerima tidak valid");
+                }
+                
+                if (!isAccountValid) {
+                    errorMessages.push("❌ Nomor DANA tidak valid");
+                }
+                
+                if (!isAmountValid) {
+                    errorMessages.push(`❌ Jumlah transfer Rp ${ocrData.amount.toLocaleString()} tidak sesuai (harus Rp ${expectedAmount.toLocaleString()})`);
+                }
+                
+                if (!isTimeValid) {
+                    errorMessages.push(timeError);
+                }
+                
+                if (!isPhotoValid) {
+                    errorMessages.push("❌ Foto bukti tidak valid (buram/tampak diedit)");
+                }
+                
+                validationResult.innerHTML = `
+                    <div class="error-box">
+                        <h3>❌ VERIFIKASI GAGAL</h3>
+                        <p>Sistem menolak karena:</p>
+                        <ul style="color: #ff5555;">
+                            ${errorMessages.map(msg => `<li>${msg}</li>`).join('')}
+                        </ul>
+                        <div class="strict-rules">
+                            <p>UPLOAD ULANG BUKTI TRANSFER YANG:</p>
+                            <ol>
+                                <li>Nama penerima TEPAT</li>
+                                <li>Nomor DANA TEPAT</li>
+                                <li>Jumlah TRANSFER TEPAT</li>
+                                <li>Waktu transfer ≤3 menit yang lalu</li>
+                                <li>Foto JELAS dan ASLI</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        function completePayment() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
