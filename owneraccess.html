@@ -1,0 +1,24 @@
+<!-- Owner Access Button -->
+<div class="owner-access">
+    <button class="owner-btn" onclick="showOwnerModal()">Owner Access</button>
+</div>
+
+<!-- Owner Modal -->
+<div id="ownerModal" class="owner-modal">
+    <div class="owner-content">
+        <h2>Owner Access</h2>
+        <div id="ownerLogin">
+            <div class="form-group">
+                <label for="ownerPassword">Password:</label>
+                <input type="password" id="ownerPassword" placeholder="Enter password">
+                <div id="ownerPasswordError" class="error-message"></div>
+            </div>
+            <button onclick="checkOwnerPassword()">Login</button>
+        </div>
+        <div id="ownerData" class="owner-data hidden">
+            <h3>Purchase Data</h3>
+            <div id="purchaseList"></div>
+            <button onclick="hideOwnerModal()" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+</div>
