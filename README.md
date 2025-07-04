@@ -1,2 +1,0 @@
-# ffbetavipdamzs69up-
-vip
